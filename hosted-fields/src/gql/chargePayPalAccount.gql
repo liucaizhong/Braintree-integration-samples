@@ -1,0 +1,124 @@
+mutation chargePayPalAccount($input: ChargePayPalAccountInput!) {
+      ChargePayPalAcc: chargePayPalAccount(input: $input) {
+        billingAgreementWithPurchasePaymentMethod {
+            ... ppPaymentMethod
+        }
+        transaction {
+            ... ppTransaction
+        }
+    } 
+}
+
+fragment ppPaymentMethod on PaymentMethod {
+    id
+    createdAt
+    usage
+    details {
+        ... on PayPalAccountDetails {
+            billingAgreementId
+            email
+            payerId
+        }
+    }
+    customer {
+        id
+    }
+}
+
+fragment ppTransaction on Transaction {
+    id
+    createdAt
+    paymentMethodSnapshot {
+        ... on PayPalTransactionDetails {
+                captureId
+                payerStatus
+                payer {
+                    email
+                    payerId
+                }
+            }
+    }
+    merchantAccountId
+    orderId
+    purchaseOrderNumber
+    billingAddress {
+        postalCode
+        countryCode
+        addressLine1
+        addressLine2
+        adminArea1
+        adminArea2
+        phoneNumber
+        fullName
+    }
+    status
+    statusHistory {
+        status
+        timestamp
+        terminal
+            ...on ProcessorDeclinedEvent {
+                riskDecision
+                processorResponse {
+                    ...processorResponseFields
+                }
+            }
+            ...on GatewayRejectedEvent {
+                networkResponse {
+                    code
+                    message
+                }
+                riskDecision
+                duplicateOf {
+                    id
+                    status
+                }
+                gatewayRejectionReason
+                processorResponse {
+                    ...processorResponseFields
+                }
+            }
+            ...on FailedEvent {
+                networkResponse {
+                    code
+                    message
+                }
+                riskDecision
+                processorResponse {
+                    ...processorResponseFields
+                }
+            }
+    }
+    riskData {
+        id
+    }
+    customer {
+        id
+    }
+    shipping {
+        shippingAddress {
+            postalCode
+            countryCode
+            firstName
+            lastName
+        }
+    }
+    lineItems {
+        name
+        description
+        url
+        commodityCode
+        productCode
+    }
+}
+
+fragment processorResponseFields on TransactionAuthorizationProcessorResponse {
+    legacyCode
+    message
+    cvvResponse
+    avsPostalCodeResponse
+    avsStreetAddressResponse
+    authorizationId
+    additionalInformation
+    retrievalReferenceNumber
+    emvData
+}

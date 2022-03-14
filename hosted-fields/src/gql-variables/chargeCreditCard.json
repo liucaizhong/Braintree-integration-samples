@@ -1,0 +1,9 @@
+{
+  "input": {
+    "paymentMethodId": "",
+    "transaction": {
+      "amount": "599",
+      "merchantAccountId": "paypal_ge_eur"
+    }
+  }
+}

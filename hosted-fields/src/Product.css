@@ -1,0 +1,10 @@
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  white-space: pre-line;
+}
+
+.item-number {
+  text-align: right;
+  color: rgb(117, 117, 117);
+}

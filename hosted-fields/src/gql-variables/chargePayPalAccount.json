@@ -1,0 +1,67 @@
+{
+  "input": {
+    "paymentMethodId": "",
+    "options": {
+        "customField": "routingMerchantId",
+        "description": "Alipay - Description of the transaction that is displayed to customers in PayPal email receipts",
+        "riskContext": {
+            "fields": [
+                {
+                    "name": "business_name",
+                    "value": "Moneygun Electronics Co., Ltd."
+                },
+                {
+                    "name": "receiver_account_id",
+                    "value": "seller_Alipay_id_abcd"
+                }
+            ]
+        }
+    },
+    "transaction": {
+      "amount": "1300",
+      "tax": {
+          "taxAmount": "100"
+      },
+      "merchantAccountId": "paypal_us_usd",
+      "orderId": "charge_paypal_acc_20211116_0001",
+      "purchaseOrderNumber": "PO-PO_01",
+      "shipping": {
+          "shippingAmount": "100",
+          "shippingAddress": {
+              "addressLine1": "1500northcongressavenue",
+              "adminArea1": "KS",
+              "adminArea2": "Fort Riley",
+              "countryCode": "USA",
+              "firstName": "***",
+              "lastName": "Hicks",
+              "postalCode": "66442-4828"
+          }
+      },
+      "lineItems": [
+          {
+              "name": "Water Cooling ATX Desktop New Design Computer Case",
+              "quantity": "1",
+              "commodityCode": "62509022542",
+              "productCode": "62509022542-ABC",
+              "kind": "DEBIT",
+              "unitAmount": "1000",
+              "totalAmount": "1000",
+              "description": "Dunao(Guangzhou) Electronics Co., Ltd.",
+              "url": "https://www.alibaba.com/product-detail/Water-Cooling-ATX-Desktop-New-Design_62509022542.html?spm=a27aq.13817715.recommend_for_you.52.44d671a9lrqJgU"
+
+          },
+          {
+              "name": "Item-2",
+              "quantity": "1",
+              "commodityCode": "UNSPSC-02",
+              "productCode": "productCode-02",
+              "kind": "DEBIT",
+              "unitAmount": "100",
+              "totalAmount": "100",
+              "description": "ICBU-SPREAD",
+              "url": "item-url-2"
+          }
+      ]
+    }
+  }
+}

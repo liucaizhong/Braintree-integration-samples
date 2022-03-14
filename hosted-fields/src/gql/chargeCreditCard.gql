@@ -1,0 +1,64 @@
+mutation chargeCreditCard($input: ChargeCreditCardInput!) {
+  ChargeCreditCard: chargeCreditCard(input: $input) {
+    transaction {
+      id
+      legacyId
+      createdAt
+      paymentMethodSnapshot {
+        ... ppCreditCardTransactionDetails
+      }
+      merchantId
+      merchantAccountId
+      merchantName
+      orderId
+      purchaseOrderNumber
+      status
+      channel
+      source
+      scaExemptionRequested
+      discountAmount
+      paymentInitiatedAt
+    }
+  }
+}
+
+fragment ppBinData on BinRecord {
+  prepaid
+  healthcare
+  debit
+  durbinRegulated
+  commercial
+  payroll
+  issuingBank
+  countryOfIssuance
+  productId
+}
+
+fragment ppCreditCardDetails on CreditCardDetails {
+  brandCode
+  last4
+  bin
+  binData {
+    ... ppBinData
+  }
+  expirationMonth
+  expirationYear
+  cardholderName
+  uniqueNumberIdentifier
+  cardOnFileNetworkTokenized
+}
+
+fragment ppCreditCardTransactionDetails on CreditCardTransactionDetails {
+  creditCard {
+  ...ppCreditCardDetails
+  }
+  networkTransactionId
+  accountType
+  acquirerReferenceNumber
+  processedWithCardOnFileNetworkToken
+  accountBalance {
+    value
+    currencyCode
+  }
+}
+
