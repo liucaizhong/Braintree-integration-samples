@@ -30,6 +30,7 @@ router.post('/checkout', (req, res) => {
   });
 });
 
+// maid configs
 const BNPL_CONFIGS = {
   US: 'paypal_us_usd',
   GB: 'paypal_uk_gbp',
