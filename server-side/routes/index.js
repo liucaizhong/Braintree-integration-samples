@@ -33,8 +33,10 @@ router.post('/checkout', (req, res) => {
 // maid configs
 const BNPL_CONFIGS = {
   US: 'paypal_us_usd',
+  US1: 'paypal_us_eur',
   GB: 'paypal_uk_gbp',
   FR: 'paypal_fr_eur',
+  FR1: 'paypal_lu_usd',
   DE: 'paypal_de_eur',
   AU: 'paypal_au_aud',
   IT: 'paypal_it_eur',
@@ -44,7 +46,7 @@ const BNPL_CONFIGS = {
 };
 router.get('/client_token', (req, res) => {
   gateway.clientToken.generate({
-    merchantAccountId: BNPL_CONFIGS[req.query.country],
+    merchantAccountId: BNPL_CONFIGS[req.query.country || 'US'],
     customerId: req.query.customerId,
   }).then(response => {
     res.send(response.clientToken);

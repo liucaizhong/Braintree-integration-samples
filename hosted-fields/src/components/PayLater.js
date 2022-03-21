@@ -8,7 +8,12 @@ const { Option } = Select;
 const BNPL_CONFIGS = {
   US: {
     cur: 'USD',
-    amount: '1500.00',
+    amount: '1100.00',
+  },
+  US1: {
+    cur: 'EUR',
+    amount: '1000.00',
+    buyerCountry: 'FR',
   },
   AU: {
     cur: 'AUD',
@@ -26,6 +31,11 @@ const BNPL_CONFIGS = {
     cur: 'EUR',
     amount: '1800.00',
   },
+  FR1: {
+    cur: 'USD',
+    amount: '1500.00',
+    buyerCountry: 'IT',
+  },
   IT: {
     cur: 'EUR',
     amount: '1600.00',
@@ -37,12 +47,10 @@ const BNPL_CONFIGS = {
 };
 
 const PayLater = () => {
-  const defaultBuyerCountry = 'FR';
+  const defaultBuyerCountry = 'US';
   const [buyerCountry, setBuyerCountry] = useState(defaultBuyerCountry);
 
   useEffect(() => {
-    console.log('buyer country: ', buyerCountry);
-    // 3dSecure
     axios
       .get(`/restapi/client_token?country=${buyerCountry}`)
       .then((result) => {
@@ -62,7 +70,7 @@ const PayLater = () => {
             paypalCheckoutInstance
               .loadPayPalSDK({
                 components: 'buttons,messages',
-                'buyer-country': buyerCountry,
+                'buyer-country': BNPL_CONFIGS[buyerCountry].buyerCountry || buyerCountry.slice(0, 2), // for sandbox
                 currency: BNPL_CONFIGS[buyerCountry].cur,
                 'enable-funding': 'paylater',
                 dataAttributes: {
@@ -83,13 +91,14 @@ const PayLater = () => {
                   onApprove: function (data, actions) {
                     return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
                       // Submit `payload.nonce` to your server
-                      console.log('BNPL nonce: ', payload.nonce);
+                      console.log('BNPL nonce: ', payload);
                     });
                   },
                 });
 
                 if (!button.isEligible()) {
                   // Skip rendering if not eligible
+                  console.error("button isn't eligible");
                   return;
                 }
 
@@ -129,7 +138,8 @@ const PayLater = () => {
         data-pp-layout="text"
         data-pp-text-color="black"
         data-pp-logo-type="inline"
-        data-pp-buyerCountry={buyerCountry === 'FR' ? 'FR' : undefined}
+        data-pp-buyerCountry={BNPL_CONFIGS[buyerCountry].buyerCountry || buyerCountry.slice(0, 2)}
+        // data-pp-currency={BNPL_CONFIGS[buyerCountry].buyerCountry || buyerCountry.slice(0, 2)}
         data-pp-amount={BNPL_CONFIGS[buyerCountry].amount}
       ></div>
       <div id="pay-later-button"></div>

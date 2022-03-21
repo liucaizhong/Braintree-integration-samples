@@ -6,7 +6,7 @@ import './Purchase.css';
 const { Option } = Select;
 
 const Purchase = ({ total, buyer }) => {
-  const [paymentMethod, setPaymentMethod] = useState('HostedFields');
+  const [paymentMethod, setPaymentMethod] = useState('PayLater');
   const onChange = (value) => {
     setPaymentMethod(value);
   };
@@ -15,7 +15,7 @@ const Purchase = ({ total, buyer }) => {
     <div className="purchase">
       <Select
         showSearch
-        defaultValue="HostedFields"
+        defaultValue="PayLater"
         style={{ width: '100%' }}
         placeholder="Select a payment method"
         optionFilterProp="children"

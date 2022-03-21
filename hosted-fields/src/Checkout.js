@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable no-undef -- brainTree is global variable */
+import React, { useState, useEffect } from 'react';
 import { Button, Drawer } from 'antd';
+// import axios from 'axios';
 import Buyer from './Buyer';
 import Product from './Product';
 import Purchase from './Purchase';
@@ -35,8 +37,48 @@ const Checkout = () => {
     setPaymentVisible(!paymentVisible);
   };
 
+  useEffect(() => {
+    // axios
+    //   .get(`/restapi/client_token?country=US`)
+    //   .then((result) => {
+    //     const { data: token } = result;
+    //     console.log('bnpl token: ', token);
+    braintree.client
+      .create({
+        authorization: process.env.REACT_APP_CLIENT_TOKEN,
+      })
+      .then((clientInstance) => {
+        // Create a PayPal Checkout component.
+        return braintree.paypalCheckout.create({
+          client: clientInstance,
+        });
+      })
+      .then((paypalCheckoutInstance) => {
+        paypalCheckoutInstance.loadPayPalSDK({
+          components: 'messages',
+          // 'buyer-country': 'FR', // for sandbox
+          // 'enable-funding': 'paylater',
+          // Other config options here
+        });
+      });
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
+  }, []);
+
   return (
     <div className="app">
+      <div
+        data-pp-message
+        data-pp-layout="text"
+        data-pp-text-color="black"
+        data-pp-logo-type="inline"
+        data-pp-buyerCountry="DE"
+        data-pp-placement="home"
+        data-pp-currency="EUR"
+        // data-pp-amount="1500"
+      ></div>
       <Buyer defaultInfo={customer} onChange={setCustomer} />
       <Product info={product} />
       <Button className="checkout-btn" type="primary" block onClick={togglePayment}>
