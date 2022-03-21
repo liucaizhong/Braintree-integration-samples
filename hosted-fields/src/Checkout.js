@@ -75,9 +75,9 @@ const Checkout = () => {
         data-pp-layout="text"
         data-pp-text-color="black"
         data-pp-logo-type="inline"
-        data-pp-buyerCountry="DE"
+        data-pp-buyerCountry="AU"
         data-pp-placement="home"
-        data-pp-currency="EUR"
+        data-pp-currency="AUD"
         // data-pp-amount="1500"
       ></div>
       <Buyer defaultInfo={customer} onChange={setCustomer} />
