@@ -46,6 +46,7 @@ const Checkout = () => {
     braintree.client
       .create({
         authorization: process.env.REACT_APP_CLIENT_TOKEN,
+        // authorization: token,
       })
       .then((clientInstance) => {
         // Create a PayPal Checkout component.
