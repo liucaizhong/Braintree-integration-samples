@@ -33,11 +33,13 @@ router.post('/checkout', (req, res) => {
 // maid configs
 const BNPL_CONFIGS = {
   US: 'paypal_us_usd',
-  US1: 'paypal_us_eur',
+  US1: 'paypal_us_usd',
+  US2: 'paypal_us_eur',
   GB: 'paypal_uk_gbp',
   FR: 'paypal_fr_eur',
   FR1: 'paypal_lu_usd',
   DE: 'paypal_de_eur',
+  DE1: 'paypal_lu_usd',
   AU: 'paypal_au_aud',
   IT: 'paypal_it_eur',
   ES: 'paypal_es_eur',

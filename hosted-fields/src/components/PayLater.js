@@ -8,12 +8,17 @@ const { Option } = Select;
 const BNPL_CONFIGS = {
   US: {
     cur: 'USD',
-    amount: '1100.00',
+    amount: '1200.00',
   },
   US1: {
+    cur: 'USD',
+    amount: '1000.00',
+    buyerCountry: 'DE',
+  },
+  US2: {
     cur: 'EUR',
     amount: '1000.00',
-    buyerCountry: 'FR',
+    buyerCountry: 'US',
   },
   AU: {
     cur: 'AUD',
@@ -27,14 +32,19 @@ const BNPL_CONFIGS = {
     cur: 'EUR',
     amount: '1000.00',
   },
+  DE1: {
+    cur: 'USD',
+    amount: '1500.00',
+    buyerCountry: 'DE',
+  },
   FR: {
     cur: 'EUR',
-    amount: '1800.00',
+    amount: '1200.00',
   },
   FR1: {
     cur: 'USD',
     amount: '1500.00',
-    buyerCountry: 'IT',
+    buyerCountry: 'US',
   },
   IT: {
     cur: 'EUR',
@@ -47,7 +57,7 @@ const BNPL_CONFIGS = {
 };
 
 const PayLater = () => {
-  const defaultBuyerCountry = 'US';
+  const defaultBuyerCountry = 'US2';
   const [buyerCountry, setBuyerCountry] = useState(defaultBuyerCountry);
 
   useEffect(() => {
@@ -80,6 +90,10 @@ const PayLater = () => {
               })
               .then(function () {
                 const button = paypal.Buttons({
+                  style: {
+                    color: 'gold',
+                    shape: 'pill',
+                  },
                   fundingSource: paypal.FUNDING.PAYLATER,
                   createOrder: function () {
                     return paypalCheckoutInstance.createPayment({
@@ -139,8 +153,9 @@ const PayLater = () => {
         data-pp-text-color="black"
         data-pp-logo-type="inline"
         data-pp-buyerCountry={BNPL_CONFIGS[buyerCountry].buyerCountry || buyerCountry.slice(0, 2)}
-        // data-pp-currency={BNPL_CONFIGS[buyerCountry].buyerCountry || buyerCountry.slice(0, 2)}
+        data-pp-currency={BNPL_CONFIGS[buyerCountry].cur}
         data-pp-amount={BNPL_CONFIGS[buyerCountry].amount}
+        data-pp-style-logo-position="top"
       ></div>
       <div id="pay-later-button"></div>
     </>
