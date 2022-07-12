@@ -6,7 +6,7 @@ import axios from 'axios';
 const PayPalVault = () => {
   useEffect(() => {
     axios
-      .get(`/restapi/client_token?country=ILS`)
+      .get(`/restapi/client_token?country=US`)
       .then((result) => {
         const { data: token } = result;
         console.log('bnpl token: ', token);
@@ -27,6 +27,13 @@ const PayPalVault = () => {
           .then((paypalCheckoutInstance) => {
             return paypal
               .Buttons({
+                style: {
+                  color: 'black',
+                  // shape: 'pill',
+                  // edges: 'hard',
+                  label: 'buynow',
+                },
+
                 fundingSource: paypal.FUNDING.PAYPAL,
 
                 createBillingAgreement: function () {
@@ -53,10 +60,8 @@ const PayPalVault = () => {
                 onApprove: (data, actions) => {
                   return paypalCheckoutInstance.tokenizePayment(data).then((payload) => {
                     // Submit `payload.nonce` to your server
-                    const { nonce } = payload;
-                    if (nonce) {
-                      console.log(nonce);
-                    }
+                    // const { nonce } = payload;
+                    console.log(payload);
                   });
                 },
 
