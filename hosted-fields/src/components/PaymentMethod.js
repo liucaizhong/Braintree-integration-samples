@@ -17,7 +17,7 @@ export const PAYMENT_METHODS = new Map([
   ['Authorization', <Authorization />],
 ]);
 
-const PaymentMethod = ({ type = 'PayLater' }) => {
+const PaymentMethod = ({ type }) => {
   return PAYMENT_METHODS.get(type);
 };
 

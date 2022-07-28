@@ -4,9 +4,10 @@ import PaymentMethod, { PAYMENT_METHODS } from './components/PaymentMethod';
 import './Purchase.css';
 
 const { Option } = Select;
+const defaultPaymentMethod = 'PayPalCheckoutVault';
 
 const Purchase = ({ total, buyer }) => {
-  const [paymentMethod, setPaymentMethod] = useState('PayLater');
+  const [paymentMethod, setPaymentMethod] = useState(defaultPaymentMethod);
   const onChange = (value) => {
     setPaymentMethod(value);
   };
@@ -15,7 +16,7 @@ const Purchase = ({ total, buyer }) => {
     <div className="purchase">
       <Select
         showSearch
-        defaultValue="PayLater"
+        defaultValue={defaultPaymentMethod}
         style={{ width: '100%' }}
         placeholder="Select a payment method"
         optionFilterProp="children"
