@@ -44,20 +44,28 @@ const BNPL_CONFIGS = {
   FR1: {
     cur: 'USD',
     amount: '1500.00',
-    buyerCountry: 'US',
+    // buyerCountry: 'US',
   },
   IT: {
     cur: 'EUR',
     amount: '1600.00',
   },
+  IT1: {
+    cur: 'AUD',
+    amount: '1600.00',
+  },
   ES: {
     cur: 'EUR',
-    amount: '1400.00',
+    amount: '400.00',
+  },
+  ES1: {
+    cur: 'USD',
+    amount: '400.00',
   },
 };
 
 const PayLater = () => {
-  const defaultBuyerCountry = 'ES';
+  const defaultBuyerCountry = 'FR';
   const [buyerCountry, setBuyerCountry] = useState(defaultBuyerCountry);
 
   useEffect(() => {

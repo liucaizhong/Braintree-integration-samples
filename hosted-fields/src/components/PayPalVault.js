@@ -6,13 +6,14 @@ import axios from 'axios';
 const PayPalVault = () => {
   useEffect(() => {
     axios
-      .get(`/restapi/client_token?country=US`)
+      .get(`/restapi/client_token?country=FR`)
       .then((result) => {
         const { data: token } = result;
         console.log('bnpl token: ', token);
         braintree.client
           .create({
             authorization: token,
+            // authorization: process.env.REACT_APP_CLIENT_TOKEN,
           })
           .then((clientInstance) => {
             return braintree.paypalCheckout.create({

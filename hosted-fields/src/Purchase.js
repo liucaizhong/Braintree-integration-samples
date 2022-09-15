@@ -4,7 +4,7 @@ import PaymentMethod, { PAYMENT_METHODS } from './components/PaymentMethod';
 import './Purchase.css';
 
 const { Option } = Select;
-const defaultPaymentMethod = 'PayPalCheckoutVault';
+const defaultPaymentMethod = 'PayLater';
 
 const Purchase = ({ total, buyer }) => {
   const [paymentMethod, setPaymentMethod] = useState(defaultPaymentMethod);
