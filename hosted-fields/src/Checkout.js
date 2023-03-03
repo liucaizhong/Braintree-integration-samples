@@ -80,6 +80,16 @@ const Checkout = () => {
         data-pp-currency="USD"
         // data-pp-amount="393.08"
       ></div>
+      <div
+        data-pp-message
+        data-pp-placement="home"
+        data-pp-style-color="blue"
+        data-pp-style-layout="flex"
+        data-pp-style-ratio="1x1"
+        data-pp-buyerCountry="FR"
+        data-pp-currency="EUR"
+        data-pp-amount="120"
+      ></div>
       <Buyer defaultInfo={customer} onChange={setCustomer} />
       <Product info={product} />
       <Button className="checkout-btn" type="primary" block onClick={togglePayment}>

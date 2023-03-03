@@ -65,7 +65,7 @@ const BNPL_CONFIGS = {
 };
 
 const PayLater = () => {
-  const defaultBuyerCountry = 'FR';
+  const defaultBuyerCountry = 'US';
   const [buyerCountry, setBuyerCountry] = useState(defaultBuyerCountry);
 
   useEffect(() => {

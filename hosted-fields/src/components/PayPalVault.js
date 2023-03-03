@@ -6,7 +6,7 @@ import axios from 'axios';
 const PayPalVault = () => {
   useEffect(() => {
     axios
-      .get(`/restapi/client_token?country=FR`)
+      .get(`/restapi/client_token?country=US`)
       .then((result) => {
         const { data: token } = result;
         console.log('bnpl token: ', token);
